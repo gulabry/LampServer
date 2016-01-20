@@ -10,7 +10,7 @@
     $matches = $movieModel->findByMovieId($imdb_id);
     
     if (count($matches) == 1) { 
-        $url = "http://www.omdbapi.com/?i={$imdb_id}";
+        $url = "http://www.omdbapi.com/?i={$imdb_id}&tomatoes=true";
         $json = file_get_contents($url);
         $movieData = json_decode($json);
     }
@@ -37,6 +37,12 @@
         <h3>It grossed $<?=htmlentities(number_format($match['gross']))?></h3>
         <h3>The runtime is <?=htmlentities($movieData->Runtime)?></h3>
         <h3>Awards: <?=htmlentities($movieData->Awards)?></h3>
+        <h2>Rotton Tomatoes Rating</h2>
+        <h4>Tomato Meter: <?=htmlentities($movieData->tomatoMeter)?></h4>
+        <h4>Tomato Rating: <?=htmlentities($movieData->tomatoRating)?></h4>
+        <h4>Consensus: <?=htmlentities($movieData->tomatoConsensus)?></h4>
+        <h4>User Meter: <?=htmlentities($movieData->tomatoUserMeter)?></h4>
+        <h4>User Rating: <?=htmlentities($movieData->tomatoUserRating)?></h4>
     <?php endforeach; ?>
     
 </body>
