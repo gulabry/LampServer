@@ -13,10 +13,21 @@ class Movies {
 
         if (!$success) {
             trigger_error($stmt->errorInfo());
-            var_dump($success);
+
         } else {
             return $stmt->fetchAll();
-            var_dump($success);
+        }
+    }
+    
+    public function findByMovieId($name) {
+        $sql = 'select * from movies m where m.imdb_id = ?';
+        $stmt = $this->conn->prepare($sql);
+        $success = $stmt->execute(array($name));
+        if (!$success) {
+            trigger_error($stmt->errorInfo());
+
+        } else {
+            return $stmt->fetchAll();
         }
     }
 }
